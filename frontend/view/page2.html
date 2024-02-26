@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Micro+5&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+        <title> heckin love niji</title>
+        <script type="module" src="../model/subCount.js"></script>
+    </head>
+    <br>
+    <body>
+        <script type="module" src="../model/subCount.js"></script>
+        <div class="rainbow-box"> <h1>Niji best company</h1> </div>
+        <a href="https://en.wikipedia.org/wiki/Black_company_(Japan)" target="_blank">
+            <img src="../public/images/niji.png" height ="517" alt="Vtubers playing lethal company while working for a lethal company" title="lethal company">
+        </a>
+        <br><br>
+        <audio controls muted autoplay>
+            <source src ="../public/audio/lastcup.mp3">
+            This browser does not support mp3 files
+        </audio>
+        <br>
+
+        <br><br>
+        <p id="p1">YouTuber Subscribers: <span id="subCount"></span> Pride's fucking stupid lmao fucking braindead cunt <3</p>
+        
+        <!-- Include the script containing the getSubscribers function -->
+        <script type="module">
+            // Import the getSubscribers function
+            import { getSubscribers } from '../model/subCount.js';
+        
+            const youtubeUser = 'UComInW10MkHJs-_vi4rHQCQ';
+            let subCountSpan = document.getElementById('subCount');
+
+            // Call the getSubscribers function with the youtubeUser parameter
+            getSubscribers(youtubeUser, (error, count) => {
+                if (error) {
+                    console.error('Error:', error);
+                } else {
+                    subCount.innerHTML = count;
+                }
+            });
+        </script>
+        </p>
+        <br><br>
+        <p id="p2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis laborum provident labore numquam eius atque ab odit repellat, mollitia delectus, ad hic laboriosam! Voluptas quisquam iusto sed cupiditate cumque id?</p>
+        <br><br>
+        <div style="background-color: rgb(0, 0, 0); width: 21vw;">
+        <p class="space">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis laborum provident labore numquam eius atque ab odit repellat, mollitia delectus, ad hic laboriosam! Voluptas quisquam iusto sed cupiditate cumque id?</p>
+        <br><br>
+        <p class="space">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis laborum provident labore numquam eius atque ab odit repellat, mollitia delectus, ad hic laboriosam! Voluptas quisquam iusto sed cupiditate cumque id?</p>
+        </div>
+        <br><br>
+        <a href="index.html" title="This takes you to the home">home</a>
+
+        <script type="module" src="../model/subCount.js"></script>
+    </body>
+</html>
