@@ -10,7 +10,7 @@ const dbPool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'Br0nzeomegalul!',
-  database: 'vtuber_db', // Replace with your actual database name
+  database: 'vtuber_db',
   waitForConnections: true,
 });
 
@@ -36,7 +36,7 @@ const fetchAndStoreSubCounts = async () => {
           params: {
             part: 'statistics',
             id: youtuberId,
-            key: 'AIzaSyD6GYnOCkc0GN1T5nx3RYQCGZ0ulfpvnoo', // Replace with your API key
+            key: 'AIzaSyD6GYnOCkc0GN1T5nx3RYQCGZ0ulfpvnoo', 
           },
         });
 
@@ -60,7 +60,7 @@ const fetchAndStoreSubCounts = async () => {
   }
 };
 
-// Schedule the task to run daily at 4:00 PM
+// Schedule the task to run daily at 5:00 PM
 cron.schedule('0 17 * * *', fetchAndStoreSubCounts);
 
 // Start the Express server
