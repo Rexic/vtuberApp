@@ -1,17 +1,43 @@
 const express = require('express');
+const mysql = require('mysql2/promise');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
 const port = 3000;
-
 app.use(cors());
 
-// Serve HTML files from the 'frontend' directory
+const dbPool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: 'Br0nzeomegalul!',
+    database: 'vtuber_db',
+    waitForConnections: true,
+});
+
+// Serve files from the 'frontend' directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.static(path.join(__dirname, '../frontend/view')));
-// Serve JavaScript files from the 'backend' directory
-app.use('/backend', express.static(path.join(__dirname, 'backend')));
+
+app.get('/api/fetchSubCounts', async (req, res) => {
+    try {
+        const [rows] = await dbPool.query('SELECT channelname, currentsubcount  FROM youtubenames ORDER BY currentsubcount DESC');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching subcounts:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/app/fetchLastUpdated', async (req, res) => {
+    try{
+        const time = await dbPool.query('SELECT timestamp FROM subcounthistory ORDER BY timestamp LIMIT 1');
+        res.json(time);
+    } catch (error) {
+        console.error('Error fetching time:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
