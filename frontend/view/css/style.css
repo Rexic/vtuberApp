@@ -4,6 +4,7 @@ body {
     background-attachment: fixed;
     background-position: fixed;
     background-size: cover;
+    margin: 0;
 }
 h1{
     color: black;
@@ -69,4 +70,83 @@ h1{
     -webkit-text-fill-color: transparent;
     background-clip: text;
     width: 21vw;
+}
+
+header {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #555;
+    padding: 5px;
+    margin-left :0px;
+    margin-top: 0px;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 16px;
+    text-align: center;
+}
+
+nav a:hover {
+    background-color: #777;
+}
+
+.logo {
+    margin-right: auto; /* Push the logo to the left */
+    padding: 0px;
+    width: 80px; /* Set the width of your logo */
+    height: 40px; /* Set the height of your logo */
+    object-fit: contain; 
+  }
+
+.highlighted{
+    background-color: yellow;
+}
+
+.nonhighlighted{
+    background-color: rgba(0, 255, 255, 0.35);
+}
+
+#subcountsTable {
+    border-collapse: collapse;
+    text-align: center;
+    border: 1px solid black;
+    width: 25%;
+    padding: 8px;
+    margin-left: 200px;
+}
+#subcountsTable th {
+    border: 2px solid black;
+    padding: 8px;
+    margin-left: 10px;
+    background-color: #1a87cf;
+}
+
+#subcountsTitle{
+    text-align: center;
+    width: 25%;
+    margin-left: 200px;
+}
+
+#subcountsTable td {
+    border: 2px solid black; 
+    padding: 8px;
+    
+}
+
+#lastUpdatedTime{
+    margin-left: 200px;
 }

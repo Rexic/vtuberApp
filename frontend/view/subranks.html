@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Subcounts</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Micro+5&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar-container">
+        <header>
+            <div class="logo">
+                <a href="index.html" title="Home">
+                    <img src="../public/images/bw.jpg" alt="Logo">
+                </a>
+            </div>
+            <h1>Dokibird x Nijisanji EN comparator</h1>
+          </header>
+        
+          <nav>
+            <a href="subranks.html" title="This takes you to the current sub counts of each vtuber">Subscriber Counts</a>
+            <a href="subHistory.html" title="This takes you to a chart comparing the sub count over time between vtubers">Subscriber History</a>
+            <a href="information.html" title="This takes you to the second page">Information</a>
+          </nav>
+    </div>
+
+    <h1 id="subcountsTitle"> YouTube Subcounts </h1>
+    <table id="subcountsTable">
+        <thead>
+            <tr>
+                <th>Youtuber Name</th>
+                <th>Subcount</th>
+            </tr>
+        </thead>
+        <tbody id="subcountsBody">
+            <!-- Table body will be populated dynamically -->
+        </tbody>
+    </table>
+    <div id="lastUpdatedTime"></div>
+    <!-- Link the external script -->
+    <script src="subcountList.js" type="module"></script>
+
+    <script type="module">
+        import {fetchLastUpdated} from '../controller/lastupdated.js';
+        
+        fetchLastUpdated().then(time => {
+            document.getElementById('lastUpdatedTime').innerText = `Last Updated: ${time}`;
+        });
+    </script>
+</body>
+</html>
