@@ -1,35 +1,104 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Micro+5&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <title>Niji x Doki website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscriber History</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Micro+5&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="navbar-container">
+  <div class="navbar-container">
     <header>
         <div class="logo">
-            <a href="index.html" title="Home">
-              <img src="../public/images/bw.jpg" alt="Logo">
-            </a>
+          <a href="index.html" title="Home">
+            <img src="../public/images/bw.jpg" alt="Logo">
+          </a>
         </div>
         <h1>Dokibird x Nijisanji EN comparator</h1>
       </header>
     
       <nav>
+        <a href="index.html" title="This takes you to the home">Home</a>
         <a href="subranks.html" title="This takes you to the current sub counts of each vtuber">Subscriber Counts</a>
-        <a href="subHistory.html" title="This takes you to a chart comparing the sub count over time between vtubers">Subscriber History</a>
-        <a href="information.html" title="This takes you to the second page">Information</a>
+        <a href="information.html" title="Page that gives information about the situation">Information</a>
+        <a href="about.html" title="About page">About</a>
       </nav>
-    </div>
-    <!-- Basic setup for a website-->
-</body>
+  </div>
+  <br><br><br><br><br><br><br><br><br><br><br>
+  <h1 id="subsGraphTitle">Subscriber Count Over Time</h1>
+  <canvas id="subscribersChart" width="800" height="400"></canvas>
+  
+  <script>
 
+    async function fetchData() {
+      const response = await fetch('/api/fetchSubsOverTime'); // Update the URL based on your server setup
+      const data = await response.json();
+      return data;
+    }
+
+    async function createChart() {
+      const channelData = await fetchData();
+
+      const numChannels = channelData.length;
+      const indices = Array.from({ length: numChannels }, (_, index) => index);
+      const initialSubcounts = channelData.map(data => data.initialsubcount);
+      const currentSubcounts = channelData.map(data => data.currentsubcount);
+      const hexcodes = channelData.map(data => data.hexcolor);
+
+      const ctx = document.getElementById('subscribersChart').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: indices,
+          datasets: channelData.map((data, index) => ({
+            label: data.channelname,
+            borderColor: hexcodes[index],
+            data: [initialSubcounts[index], currentSubcounts[index]],
+            fill: false,
+            hidden: ['Ike Eveland', 'Vox Akuma', 'Luca Kaneshiro', 'Shu Yamino', 'RenZotto', 'Yu Q. Wilson', 'Claude Clawmark', 'Vezalius Bandage', 'Vantacrow Bringer', 
+            'Ver Vermillion', 'Doppio Dropscythe', 'Kunai Nakasato', 'Victoria Brightshield', 'Hex Haywire'].includes(data.channelname)
+          }))
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'linear', 
+              position: 'bottom', 
+              title: {
+                display: true,
+                text: 'Subcounts from before the drama to now'
+              }
+            },
+            y: {
+              beginAtZero: true
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'bottom'
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return context.dataset.label + ': ' + context.raw;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', createChart);
+  </script>
+
+  <br><br>
+  <a href="index.html" title="This takes you to the home">home</a>
+      
+</body>
 </html>

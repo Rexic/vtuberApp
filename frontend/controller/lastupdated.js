@@ -11,7 +11,7 @@ const options = {
 
 export async function fetchLastUpdated() {
     try {
-        const response = await fetch('/app/fetchLastUpdated');
+        const response = await fetch('/api/fetchLastUpdated');
         const data = await response.json();
         const dateObject = new Date(data[0][0].timestamp).toLocaleString('en-US', options);
         return dateObject;
