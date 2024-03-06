@@ -7,9 +7,9 @@ const app = express();
 
 // MySQL connection pool
 const dbPool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'Br0nzeomegalul!',
+  host: 'ls-5e1dc7d3a6323bf34ddae7818169dc448e128270.cvus6waksakp.ap-southeast-2.rds.amazonaws.com',
+  user: 'dbmasteruser',
+  password: 'yz^+tk&vSHuhBpRJ3nX(Wn;=R*#PhkF$',
   database: 'vtuber_db',
   waitForConnections: true,
 });
